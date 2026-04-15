@@ -1,0 +1,97 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Heart, Sparkles } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+export default function ProposalWebpage() {
+  const [yesClicked, setYesClicked] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-red-50 to-purple-100 flex items-center justify-center p-6">
+      <div className="max-w-2xl w-full text-center space-y-8">
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <h1 className="text-4xl md:text-6xl font-bold text-pink-600 flex items-center justify-center gap-2">
+            <Heart className="text-red-500" />
+            For Tshepo ❤️
+          </h1>
+          <p className="text-gray-600 mt-4 text-lg">
+            Some moments change everything...
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <Card className="rounded-2xl shadow-2xl">
+            <CardContent className="p-8 space-y-6">
+              {!yesClicked ? (
+                <>
+                  <p className="text-xl text-gray-800">
+                    Tshepo, from the moment you came into my life, something quietly shifted in me.
+                    Not in a loud way, but in a way that made everything feel softer, calmer, and more meaningful.
+                  </p>
+                  <p className="text-xl text-gray-800">
+                    You became my peace, my favourite thought, and my favourite place to be — all without trying.
+                  </p>
+                  <p className="text-xl font-semibold text-pink-600">
+                    And today, I have something important to ask you...
+                  </p>
+                  <Button
+                    onClick={() => setYesClicked(true)}
+                    className="bg-pink-600 hover:bg-pink-700 text-white text-lg px-6 py-4 rounded-2xl"
+                  >
+                    Click to reveal 💌
+                  </Button>
+                </>
+              ) : (
+                <motion.div
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 120 }}
+                  className="space-y-6"
+                >
+                  <Sparkles className="mx-auto text-yellow-500" size={40} />
+                  <h2 className="text-3xl font-bold text-pink-600">
+                    Tshepo, will you marry me? 💍
+                  </h2>
+                  <p className="text-gray-600">
+                    I don’t just want moments with you — I want a lifetime.
+                    The good, the bad, and everything in between, with you.
+                  </p>
+
+                  <div className="flex justify-center gap-4 mt-6">
+                    <Button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-2xl">
+                      YES 💖
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="px-6 py-3 rounded-2xl"
+                      onMouseOver={(e) => {
+                        e.target.style.position = "relative";
+                        e.target.style.left = Math.random() * 100 - 50 + "px";
+                        e.target.style.top = Math.random() * 50 - 25 + "px";
+                      }}
+                    >
+                      No
+                    </Button>
+                  </div>
+                </motion.div>
+              )}
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <p className="text-sm text-gray-500">
+          Made with love, just for Tshepo ❤️
+        </p>
+      </div>
+    </div>
+  );
+}
